@@ -5,15 +5,14 @@ import (
 )
 
 func TestParseCertExpiration(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	const shortForm = "2006-Jan-02"
 	testCertExpiration := int64(1401321600)
 	tests := []struct {
-		name string
-		cert []byte
-	}{
-		{
-			name: "valid cert",
-			cert: []byte(`-----BEGIN CERTIFICATE-----
+		name	string
+		cert	[]byte
+	}{{name: "valid cert", cert: []byte(`-----BEGIN CERTIFICATE-----
 MIIDujCCAqKgAwIBAgIIE31FZVaPXTUwDQYJKoZIhvcNAQEFBQAwSTELMAkGA1UE
 BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
 cm5ldCBBdXRob3JpdHkgRzIwHhcNMTQwMTI5MTMyNzQzWhcNMTQwNTI5MDAwMDAw
@@ -34,11 +33,7 @@ TZZyzmEOyclm3UGFYe82P/iDFt+CeQ3NpmBg+GoaVCuWAARJN/KfglbLyyYygcQq
 0SgeDh8dRKUiaW3HQSoYvTvdTuqzwK4CXsr3b5/dAOY8uMuG/IAR3FgwTbZ1dtoW
 RvOTa8hYiU6A475WuZKyEHcwnGYe57u2I2KbMgcKjPniocj4QzgYsVAVKW3IwaOh
 yE+vPxsiUkvQHdO2fojCkY8jg70jxM+gu59tPDNbw3Uh/2Ij310FgTHsnGQMyA==
------END CERTIFICATE-----`),
-		},
-		{
-			name: "invalid cert",
-			cert: []byte(`-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----`)}, {name: "invalid cert", cert: []byte(`-----BEGIN CERTIFICATE-----
 MIIDujCCAqKgAwIBAgIIE31FZVaPXTUwDQYJKoZIhvcNAQEFBQAwSTELMAkGA1UE
 BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
 cm5ldCBBdXRob3JpdHkgRzIwHhcNMTQwMTI5MTMyNzQzWhcNMTQwNTI5MDAwMDAw
@@ -59,10 +54,7 @@ TZZyzmEOyclm3UGFYe82P/iDFt+CeQ3NpmBg+GoaVCuWAARJN/KfglbLyyYygcQq
 0SgeDh8dRKUiaW3HQSoYvTvdTuqzwK4CXsr3b5/dAOY8uMuG/IAR3FgwTbZ1dtoW
 RvOTa8hYiU6A475WuZKyEHcwnGYe57u2I2KbMgcKjPniocj4QzgYsVAVKW3IwaOh
 yE+vPxsiUkvQHdO2fojCkY8jg70jxM+gu59tPDNbw3Uh/2Ij310FgTHsnGQMyA==
------`),
-		},
-	}
-
+-----`)}}
 	for _, tt := range tests {
 		if tt.name == "valid cert" {
 			t.Run(tt.name, func(t *testing.T) {
@@ -75,7 +67,6 @@ yE+vPxsiUkvQHdO2fojCkY8jg70jxM+gu59tPDNbw3Uh/2Ij310FgTHsnGQMyA==
 				}
 			})
 		}
-
 		if tt.name == "invalid cert" {
 			t.Run(tt.name, func(t *testing.T) {
 				_, err := parseCertExpiration(tt.cert)
@@ -86,8 +77,9 @@ yE+vPxsiUkvQHdO2fojCkY8jg70jxM+gu59tPDNbw3Uh/2Ij310FgTHsnGQMyA==
 		}
 	}
 }
-
 func TestReadCert(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := readCert("")
 	if err == nil {
 		t.Error("Expected error in reading cert, did not get an error")
