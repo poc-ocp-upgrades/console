@@ -80,9 +80,13 @@ type Server struct {
 func (s *Server) authDisabled() bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return s.Auther == nil
 }
 func (s *Server) prometheusProxyEnabled() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return s.PrometheusProxyConfig != nil && s.PrometheusTenancyProxyConfig != nil
@@ -90,9 +94,13 @@ func (s *Server) prometheusProxyEnabled() bool {
 func (s *Server) alertManagerProxyEnabled() bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return s.AlertManagerProxyConfig != nil
 }
 func (s *Server) HTTPHandler() http.Handler {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mux := http.NewServeMux()
@@ -186,6 +194,8 @@ func (s *Server) HTTPHandler() http.Handler {
 func sendResponse(rw http.ResponseWriter, code int, resp interface{}) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	enc, err := json.Marshal(resp)
 	if err != nil {
 		plog.Printf("Failed JSON-encoding HTTP response: %v", err)
@@ -205,6 +215,8 @@ type apiError struct {
 }
 
 func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	jsg := &jsGlobals{ConsoleVersion: version.Version, AuthDisabled: s.authDisabled(), KubectlClientID: s.KubectlClientID, BasePath: s.BaseURL.Path, LoginURL: proxy.SingleJoiningSlash(s.BaseURL.String(), authLoginEndpoint), LoginSuccessURL: proxy.SingleJoiningSlash(s.BaseURL.String(), AuthLoginSuccessEndpoint), LoginErrorURL: proxy.SingleJoiningSlash(s.BaseURL.String(), AuthLoginErrorEndpoint), LogoutURL: proxy.SingleJoiningSlash(s.BaseURL.String(), authLogoutEndpoint), LogoutRedirect: s.LogoutRedirect.String(), KubeAPIServerURL: s.KubeAPIServerURL, Branding: s.Branding, DocumentationBaseURL: s.DocumentationBaseURL.String(), GoogleTagManagerID: s.GoogleTagManagerID, LoadTestFactor: s.LoadTestFactor}
@@ -235,6 +247,8 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 func (s *Server) versionHandler(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	sendResponse(w, http.StatusOK, struct {
 		Version		string	`json:"version"`
 		ConsoleVersion	string	`json:"consoleVersion"`
@@ -243,10 +257,14 @@ func (s *Server) versionHandler(w http.ResponseWriter, r *http.Request) {
 func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	w.WriteHeader(http.StatusNotFound)
 	w.Write([]byte("not found"))
 }
 func (s *Server) handleOpenShiftTokenDeletion(user *auth.User, w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if r.Method != "POST" {

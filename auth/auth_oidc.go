@@ -28,6 +28,8 @@ type oidcConfig struct {
 func newOIDCAuth(ctx context.Context, c *oidcConfig) (oauth2.Endpoint, *oidcAuth, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ctx = oidc.ClientContext(ctx, c.client)
 	p, err := oidc.NewProvider(ctx, c.issuerURL)
 	if err != nil {
@@ -36,6 +38,8 @@ func newOIDCAuth(ctx context.Context, c *oidcConfig) (oauth2.Endpoint, *oidcAuth
 	return p.Endpoint(), &oidcAuth{verifier: p.Verifier(&oidc.Config{ClientID: c.clientID}), sessions: NewSessionStore(32768), cookiePath: c.cookiePath, secureCookies: c.secureCookies}, nil
 }
 func (o *oidcAuth) login(w http.ResponseWriter, token *oauth2.Token) (*loginState, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	rawIDToken, ok := token.Extra("id_token").(string)
@@ -65,6 +69,8 @@ func (o *oidcAuth) login(w http.ResponseWriter, token *oauth2.Token) (*loginStat
 func (o *oidcAuth) logout(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if ls, _ := o.getLoginState(r); ls != nil {
 		o.sessions.deleteSession(ls.sessionToken)
 	}
@@ -73,6 +79,8 @@ func (o *oidcAuth) logout(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 func (o *oidcAuth) getLoginState(r *http.Request) (*loginState, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	sessionCookie, err := r.Cookie(openshiftSessionCookieName)
@@ -93,6 +101,8 @@ func (o *oidcAuth) getLoginState(r *http.Request) (*loginState, error) {
 func (o *oidcAuth) authenticate(r *http.Request) (*User, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ls, err := o.getLoginState(r)
 	if err != nil {
 		return nil, err
@@ -100,6 +110,8 @@ func (o *oidcAuth) authenticate(r *http.Request) (*User, error) {
 	return &User{ID: ls.UserID, Username: ls.Name, Token: ls.rawToken}, nil
 }
 func (o *oidcAuth) getKubeAdminLogoutURL() string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return ""

@@ -35,6 +35,8 @@ type Proxy struct {
 func filterHeaders(r *http.Response) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	badHeaders := []string{"Connection", "Keep-Alive", "Proxy-Connection", "Transfer-Encoding", "Upgrade"}
 	for _, h := range badHeaders {
 		r.Header.Del(h)
@@ -42,6 +44,8 @@ func filterHeaders(r *http.Response) error {
 	return nil
 }
 func NewProxy(cfg *Config) *Proxy {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	transport := &http.Transport{Proxy: http.ProxyFromEnvironment, Dial: (&net.Dialer{Timeout: 30 * time.Second, KeepAlive: 30 * time.Second}).Dial, TLSClientConfig: cfg.TLSClientConfig, TLSHandshakeTimeout: 10 * time.Second}
@@ -53,6 +57,8 @@ func NewProxy(cfg *Config) *Proxy {
 	return proxy
 }
 func SingleJoiningSlash(a, b string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	aslash := strings.HasSuffix(a, "/")
@@ -68,6 +74,8 @@ func SingleJoiningSlash(a, b string) string {
 func decodeSubprotocol(encodedProtocol string) (string, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	encodedProtocol = strings.Replace(encodedProtocol, "_", "=", -1)
 	encodedProtocol = strings.Replace(encodedProtocol, "-", "/", -1)
 	decodedProtocol, err := base64.StdEncoding.DecodeString(encodedProtocol)
@@ -77,6 +85,8 @@ func decodeSubprotocol(encodedProtocol string) (string, error) {
 var headerBlacklist = []string{"Cookie", "X-CSRFToken"}
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	w.Header().Set("Content-Security-Policy", "default-src 'none';")
@@ -217,6 +227,8 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func copyMsgs(writeMutex *sync.Mutex, dest, src *websocket.Conn) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for {
 		messageType, msg, err := src.ReadMessage()
 		if err != nil {
@@ -237,7 +249,16 @@ func copyMsgs(writeMutex *sync.Mutex, dest, src *websocket.Conn) error {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

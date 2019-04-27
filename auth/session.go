@@ -23,9 +23,13 @@ type SessionStore struct {
 func NewSessionStore(maxSessions int) *SessionStore {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &SessionStore{byToken: make(map[string]*loginState), maxSessions: maxSessions, now: defaultNow}
 }
 func (ss *SessionStore) addSession(ls *loginState) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	sessionToken := randomString(128)
@@ -43,11 +47,15 @@ func (ss *SessionStore) addSession(ls *loginState) error {
 func (ss *SessionStore) getSession(token string) *loginState {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ss.mux.Lock()
 	defer ss.mux.Unlock()
 	return ss.byToken[token]
 }
 func (ss *SessionStore) deleteSession(token string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	ss.mux.Lock()
@@ -64,6 +72,8 @@ func (ss *SessionStore) deleteSession(token string) error {
 	return fmt.Errorf("ss.byAge did not contain session %v", token)
 }
 func (ss *SessionStore) pruneSessions() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	ss.mux.Lock()

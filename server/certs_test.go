@@ -7,6 +7,8 @@ import (
 func TestParseCertExpiration(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	const shortForm = "2006-Jan-02"
 	testCertExpiration := int64(1401321600)
 	tests := []struct {
@@ -78,6 +80,8 @@ yE+vPxsiUkvQHdO2fojCkY8jg70jxM+gu59tPDNbw3Uh/2Ij310FgTHsnGQMyA==
 	}
 }
 func TestReadCert(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_, err := readCert("")

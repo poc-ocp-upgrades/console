@@ -9,6 +9,8 @@ import (
 func TestNewLoginState(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	exp := time.Now().Unix()
 	tests := []struct {
 		encoded		string

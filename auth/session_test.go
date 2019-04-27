@@ -9,6 +9,8 @@ import (
 func checkSessions(t *testing.T, ss *SessionStore) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(ss.byAge) != len(ss.byToken) {
 		t.Fatalf("age: %v != token %v", len(ss.byAge), len(ss.byToken))
 	}
@@ -20,6 +22,8 @@ func checkSessions(t *testing.T, ss *SessionStore) {
 	}
 }
 func TestSessions(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	ss := NewSessionStore(3)

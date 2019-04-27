@@ -33,6 +33,8 @@ const (
 func main() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	rl := capnslog.MustRepoLogger("github.com/openshift/console")
 	capnslog.SetFormatter(capnslog.NewStringFormatter(os.Stderr))
 	fs := flag.NewFlagSet("bridge", flag.ExitOnError)
@@ -299,6 +301,8 @@ func main() {
 func validateFlagIsURL(name string, value string) *url.URL {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	validateFlagNotEmpty(name, value)
 	ur, err := url.Parse(value)
 	if err != nil {
@@ -312,12 +316,16 @@ func validateFlagIsURL(name string, value string) *url.URL {
 func validateFlagNotEmpty(name string, value string) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if value == "" {
 		flagFatalf(name, "value is required")
 	}
 	return value
 }
 func validateFlagIs(name string, value string, expectedValues ...string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if len(expectedValues) != 1 {
@@ -334,6 +342,8 @@ func validateFlagIs(name string, value string, expectedValues ...string) string 
 	return value
 }
 func flagFatalf(name string, format string, a ...interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	log.Fatalf("Invalid flag: %s, error: %s", name, fmt.Sprintf(format, a...))

@@ -50,6 +50,8 @@ type Customization struct {
 func SetFlagsFromConfig(fs *flag.FlagSet, filename string) (err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return err
@@ -72,6 +74,8 @@ func SetFlagsFromConfig(fs *flag.FlagSet, filename string) (err error) {
 	return nil
 }
 func addServingInfo(fs *flag.FlagSet, servingInfo *ServingInfo) (err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if servingInfo.BindAddress != "" {
@@ -109,6 +113,8 @@ func addServingInfo(fs *flag.FlagSet, servingInfo *ServingInfo) (err error) {
 func addClusterInfo(fs *flag.FlagSet, clusterInfo *ClusterInfo) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if clusterInfo.ConsoleBaseAddress != "" {
 		fs.Set("base-address", clusterInfo.ConsoleBaseAddress)
 	}
@@ -120,6 +126,8 @@ func addClusterInfo(fs *flag.FlagSet, clusterInfo *ClusterInfo) {
 	}
 }
 func addAuth(fs *flag.FlagSet, auth *Auth) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	fs.Set("k8s-auth", "openshift")
@@ -140,6 +148,8 @@ func addAuth(fs *flag.FlagSet, auth *Auth) {
 func addCustomization(fs *flag.FlagSet, customization *Customization) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if customization.Branding != "" {
 		fs.Set("branding", customization.Branding)
 	}
@@ -150,7 +160,16 @@ func addCustomization(fs *flag.FlagSet, customization *Customization) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

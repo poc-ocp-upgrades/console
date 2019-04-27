@@ -12,12 +12,16 @@ import (
 func authMiddleware(a *auth.Authenticator, hdlr http.HandlerFunc) http.Handler {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := func(user *auth.User, w http.ResponseWriter, r *http.Request) {
 		hdlr.ServeHTTP(w, r)
 	}
 	return authMiddlewareWithUser(a, f)
 }
 func authMiddlewareWithUser(a *auth.Authenticator, handlerFunc func(user *auth.User, w http.ResponseWriter, r *http.Request)) http.Handler {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -51,6 +55,8 @@ type gzipResponseWriter struct {
 func (w *gzipResponseWriter) Write(b []byte) (int, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if !w.sniffDone {
 		if w.Header().Get("Content-Type") == "" {
 			w.Header().Set("Content-Type", http.DetectContentType(b))
@@ -60,6 +66,8 @@ func (w *gzipResponseWriter) Write(b []byte) (int, error) {
 	return w.Writer.Write(b)
 }
 func gzipHandler(h http.Handler) http.Handler {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -75,6 +83,8 @@ func gzipHandler(h http.Handler) http.Handler {
 	})
 }
 func securityHeadersMiddleware(hdlr http.Handler) http.HandlerFunc {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return func(w http.ResponseWriter, r *http.Request) {

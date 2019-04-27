@@ -14,6 +14,8 @@ type mockOpenShiftProvider struct{ issuer string }
 func (m *mockOpenShiftProvider) handleDiscovery(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if r.URL.Path != "/.well-known/oauth-authorization-server" {
 		http.NotFound(w, r)
 		return
@@ -31,6 +33,8 @@ type mockOIDCProvider struct{ issuer string }
 func (m *mockOIDCProvider) handleDiscovery(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if r.URL.Path != "/.well-known/openid-configuration" {
 		http.NotFound(w, r)
 		return
@@ -44,6 +48,8 @@ func (m *mockOIDCProvider) handleDiscovery(w http.ResponseWriter, r *http.Reques
 }`, m.issuer, m.issuer, m.issuer, m.issuer)
 }
 func TestNewAuthenticator(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	errURL := "http://example.com/error"
@@ -74,6 +80,8 @@ func TestNewAuthenticator(t *testing.T) {
 func TestNewOpenShiftAuthenticator(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	errURL := "http://example.com/error"
 	sucURL := "http://example.com/success"
 	p := &mockOpenShiftProvider{}
@@ -100,6 +108,8 @@ func TestNewOpenShiftAuthenticator(t *testing.T) {
 	}
 }
 func TestRedirectAuthError(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	errURL := "http://example.com/error"
@@ -131,12 +141,16 @@ const validReferer string = "https://example.com/asdf/"
 func makeAuthenticator() (*Authenticator, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	errURL := "https://example.com/error"
 	sucURL := "https://example.com/success"
 	ccfg := &Config{ClientID: "fake-client-id", ClientSecret: "fake-secret", RedirectURL: "http://example.com/callback", IssuerURL: "http://auth.example.com", ErrorURL: errURL, SuccessURL: sucURL, CookiePath: "/", RefererPath: validReferer, SecureCookies: true}
 	return newUnstartedAuthenticator(ccfg)
 }
 func testReferer(t *testing.T, referer string, accept bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	a, err := makeAuthenticator()
@@ -169,6 +183,8 @@ func testReferer(t *testing.T, referer string, accept bool) {
 func TestReferer(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	testReferer(t, validReferer, true)
 	testReferer(t, validReferer, true)
 	testReferer(t, validReferer, true)
@@ -185,6 +201,8 @@ func TestReferer(t *testing.T) {
 	testReferer(t, "https://google.com/asdf/", false)
 }
 func testCSRF(t *testing.T, token string, cookie string, accept bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	a, err := makeAuthenticator()
@@ -216,6 +234,8 @@ func testCSRF(t *testing.T, token string, cookie string, accept bool) {
 	}
 }
 func TestCSRF(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	testCSRF(t, "a", "a", true)

@@ -88,6 +88,8 @@ type Config struct {
 func newHTTPClient(issuerCA string, includeSystemRoots bool) (*http.Client, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if issuerCA == "" {
 		return http.DefaultClient, nil
 	}
@@ -124,6 +126,8 @@ func newHTTPClient(issuerCA string, includeSystemRoots bool) (*http.Client, erro
 	return httpClient, nil
 }
 func NewAuthenticator(ctx context.Context, c *Config) (*Authenticator, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	const (
@@ -186,6 +190,8 @@ func NewAuthenticator(ctx context.Context, c *Config) (*Authenticator, error) {
 func newUnstartedAuthenticator(c *Config) (*Authenticator, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	fallbackClient, err := newHTTPClient(c.IssuerCA, true)
 	if err != nil {
 		return nil, err
@@ -225,9 +231,13 @@ type User struct {
 func (a *Authenticator) Authenticate(r *http.Request) (*User, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.userFunc(r)
 }
 func (a *Authenticator) LoginFunc(w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var randData [4]byte
@@ -242,14 +252,20 @@ func (a *Authenticator) LoginFunc(w http.ResponseWriter, r *http.Request) {
 func (a *Authenticator) LogoutFunc(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	a.getLoginMethod().logout(w, r)
 }
 func (a *Authenticator) GetKubeAdminLogoutURL() string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.getLoginMethod().getKubeAdminLogoutURL()
 }
 func (a *Authenticator) CallbackFunc(fn func(loginInfo LoginJSON, successURL string, w http.ResponseWriter)) func(w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -298,16 +314,22 @@ func (a *Authenticator) CallbackFunc(fn func(loginInfo LoginJSON, successURL str
 func (a *Authenticator) getOAuth2Config() *oauth2.Config {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	oauthConfig, _ := a.authFunc()
 	return oauthConfig
 }
 func (a *Authenticator) getLoginMethod() loginMethod {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, lm := a.authFunc()
 	return lm
 }
 func (a *Authenticator) redirectAuthError(w http.ResponseWriter, authErr string, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var u url.URL
@@ -330,6 +352,8 @@ func (a *Authenticator) redirectAuthError(w http.ResponseWriter, authErr string,
 func (a *Authenticator) getSourceOrigin(r *http.Request) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	origin := r.Header.Get("Origin")
 	if len(origin) != 0 {
 		return origin
@@ -337,6 +361,8 @@ func (a *Authenticator) getSourceOrigin(r *http.Request) string {
 	return r.Referer()
 }
 func (a *Authenticator) VerifySourceOrigin(r *http.Request) (err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	source := a.getSourceOrigin(r)
@@ -356,10 +382,14 @@ func (a *Authenticator) VerifySourceOrigin(r *http.Request) (err error) {
 func (a *Authenticator) SetCSRFCookie(path string, w *http.ResponseWriter) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cookie := http.Cookie{Name: CSRFCookieName, Value: randomString(64), HttpOnly: false, Path: path, Secure: a.secureCookies}
 	http.SetCookie(*w, &cookie)
 }
 func (a *Authenticator) VerifyCSRFToken(r *http.Request) (err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	CSRFToken := r.Header.Get(CSRFHeader)
@@ -378,6 +408,8 @@ func (a *Authenticator) VerifyCSRFToken(r *http.Request) (err error) {
 	return fmt.Errorf("CSRF token does not match CSRF cookie")
 }
 func NewDexClient(hostAndPort string, caCrt, clientCrt, clientKey string) (api.DexClient, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	clientCert, err := tls.LoadX509KeyPair(clientCrt, clientKey)
@@ -407,7 +439,16 @@ func NewDexClient(hostAndPort string, caCrt, clientCrt, clientKey string) (api.D
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

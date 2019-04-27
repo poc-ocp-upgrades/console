@@ -13,6 +13,8 @@ import (
 func TestProxyWebsocket(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	proxyURL, closer, err := startProxyServer(t)
 	if err != nil {
 		t.Fatalf("problem setting up proxy server: %v", err)
@@ -39,6 +41,8 @@ func TestProxyWebsocket(t *testing.T) {
 func TestProxyHTTP(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	proxyURL, closer, err := startProxyServer(t)
 	if err != nil {
 		t.Fatalf("problem setting up proxy server: %v", err)
@@ -59,6 +63,8 @@ func TestProxyHTTP(t *testing.T) {
 func TestProxyDecodeSubprotocol(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		encoded	string
 		decoded	string
@@ -74,6 +80,8 @@ func TestProxyDecodeSubprotocol(t *testing.T) {
 	}
 }
 func startProxyServer(t *testing.T) (string, func(), error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mux := http.NewServeMux()
@@ -95,6 +103,8 @@ func startProxyServer(t *testing.T) (string, func(), error) {
 	}, nil
 }
 func lowercaseServer(t *testing.T) func(w http.ResponseWriter, r *http.Request) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	upgrader := &websocket.Upgrader{CheckOrigin: func(r *http.Request) bool {
@@ -122,9 +132,13 @@ func lowercaseServer(t *testing.T) func(w http.ResponseWriter, r *http.Request) 
 func staticServer(res http.ResponseWriter, req *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	res.Write([]byte("static"))
 }
 func readStringFromWS(ws *websocket.Conn) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_, buf, err := ws.ReadMessage()
@@ -134,6 +148,8 @@ func readStringFromWS(ws *websocket.Conn) (string, error) {
 	return string(buf), nil
 }
 func toWSScheme(url_ string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	parsed, err := url.Parse(url_)

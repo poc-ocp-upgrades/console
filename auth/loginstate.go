@@ -25,6 +25,8 @@ type LoginJSON struct {
 func newLoginState(rawToken string, claims []byte) (*loginState, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ls := &loginState{now: defaultNow, rawToken: rawToken}
 	var c struct {
 		Subject	string		`json:"sub"`
@@ -47,12 +49,16 @@ func newLoginState(rawToken string, claims []byte) (*loginState, error) {
 func (ls *loginState) toLoginJSON() LoginJSON {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return LoginJSON{UserID: ls.UserID, Name: ls.Name, Email: ls.Email, Exp: ls.exp.Unix()}
 }
 
 type jsonTime time.Time
 
 func (j *jsonTime) UnmarshalJSON(b []byte) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var n json.Number

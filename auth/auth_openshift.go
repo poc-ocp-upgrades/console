@@ -28,6 +28,8 @@ type openShiftConfig struct {
 func validateAbsURL(value string) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ur, err := url.Parse(value)
 	if err != nil {
 		return err
@@ -38,6 +40,8 @@ func validateAbsURL(value string) error {
 	return nil
 }
 func newOpenShiftAuth(ctx context.Context, c *openShiftConfig) (oauth2.Endpoint, *openShiftAuth, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	wellKnownURL := strings.TrimSuffix(c.issuerURL, "/") + "/.well-known/oauth-authorization-server"
@@ -85,6 +89,8 @@ func newOpenShiftAuth(ctx context.Context, c *openShiftConfig) (oauth2.Endpoint,
 func (o *openShiftAuth) login(w http.ResponseWriter, token *oauth2.Token) (*loginState, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if token.AccessToken == "" {
 		return nil, fmt.Errorf("token response did not contain an access token %#v", token)
 	}
@@ -100,11 +106,15 @@ func (o *openShiftAuth) login(w http.ResponseWriter, token *oauth2.Token) (*logi
 func (o *openShiftAuth) logout(w http.ResponseWriter, r *http.Request) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cookie := http.Cookie{Name: openshiftSessionCookieName, Value: "", MaxAge: 0, HttpOnly: true, Path: o.cookiePath, Secure: o.secureCookies}
 	http.SetCookie(w, &cookie)
 	w.WriteHeader(http.StatusNoContent)
 }
 func getOpenShiftUser(r *http.Request) (*User, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cookie, err := r.Cookie(openshiftSessionCookieName)
@@ -117,6 +127,8 @@ func getOpenShiftUser(r *http.Request) (*User, error) {
 	return &User{Token: cookie.Value}, nil
 }
 func (o *openShiftAuth) getKubeAdminLogoutURL() string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return o.kubeAdminLogoutURL

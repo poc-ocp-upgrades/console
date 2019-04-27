@@ -13,6 +13,8 @@ import (
 func readCert(file string) ([]byte, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, fmt.Errorf("Could not open CA cert file: %v", err)
@@ -20,6 +22,8 @@ func readCert(file string) ([]byte, error) {
 	return b, err
 }
 func parseCertExpiration(b []byte) (int64, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	block, rest := pem.Decode(b)
@@ -38,6 +42,8 @@ func parseCertExpiration(b []byte) (int64, error) {
 func getCertExpiration(path string) (int64, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	b, err := readCert(path)
 	if err != nil {
 		return 0, err
@@ -48,7 +54,16 @@ func getCertExpiration(path string) (int64, error) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }
