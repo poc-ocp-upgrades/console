@@ -10,15 +10,19 @@ import (
 type nowFunc func() time.Time
 
 func defaultNow() time.Time {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return time.Now()
 }
-
 func maxAge(exp time.Time, curr time.Time) int {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	age := exp.Sub(curr)
 	return int(age.Seconds())
 }
-
 func randomString(length int) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	bytes := make([]byte, length)
 	_, err := rand.Read(bytes)
 	if err != nil {
